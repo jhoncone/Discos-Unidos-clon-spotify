@@ -1,0 +1,22 @@
+#divcards{      
+    display:flex;
+    background-color: blueviolet;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.divcard{
+    background-color: cadetblue;
+    border:1px solid black;
+    width: 120px;
+    margin:10px;
+    align-items: center;
+    text-align: center;
+}
+#hs{
+    color: chartreuse;
+}
+#ps{
+    color: white;
+}

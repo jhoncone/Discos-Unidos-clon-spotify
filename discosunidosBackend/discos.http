@@ -1,0 +1,28 @@
+@api=http://localhost:4000
+
+GET {{api}}/discos
+
+###
+GET {{api}}/discos/60a18a946e52a10130f4ec4a
+
+###create disco
+POST {{api}}/discos
+Content-Type: application/json
+
+{
+    "url":"https://youtu.be/qJ5R9WTW0_E",
+    "title":"fazt mysql",
+    "description":"this is a fazt video"
+}
+
+
+###
+DELETE {{api}}/discos/60a189eba91a0b3a3ccf82cb
+
+###
+PUT {{api}}/discos/60a18a946e52a10130f4ec4a
+Content-Type: application/json
+
+{
+    "title":"Docker curso practico"
+}
