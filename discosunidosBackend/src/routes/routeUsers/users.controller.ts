@@ -20,6 +20,7 @@ export const getUsers:RequestHandler=async(req,res)=>{
         
     } catch (error) {
         res.json(error)
+console.log('hol')
         
     }
 }
