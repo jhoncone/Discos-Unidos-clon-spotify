@@ -9,15 +9,24 @@ function UserList() {
   const [users,setUsers]=useState<User[]>([])
   const loadUsers=async()=>{
     const res=await userService.getUsers();
-    setUsers(res.data);
+    const formatedUsers=res.data.map(user=>{
+      return{
+        ...user,
+        createAdt:user.createAdt? new Date(user.createAdt):new Date(),
+        updateAdt:user.updatedAt? new Date(user.updatedAt):new Date(),
+      }
+    })
+    .sort((a,b)=>b.createAdt.getTime() - a.createAdt.getTime())
+
+    setUsers(formatedUsers);
   }
   useEffect(() => {
   loadUsers()
   }, [])
   return (
-        <div>
+        <div className="row">
             {users.map((user)=>{
-              return <UserItem user={user}/>
+              return <UserItem user={user} key={user._id} loadUsers={loadUsers}/>
             })}
         </div>
   );

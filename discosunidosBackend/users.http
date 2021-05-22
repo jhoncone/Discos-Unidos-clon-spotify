@@ -3,14 +3,25 @@
 GET {{api}}/users
 
 ###
-GET {{api}}/users/
+GET {{api}}/auth/signin
 
 ###create users
-POST {{api}}/users
+POST {{api}}/auth/signup
 Content-Type: application/json
 
 {
-    "fullname":"Jorge Valem",
-    "username":"valem",
-    "password":"users"
+    "username":"ernest",
+    "email":"ermesto@gmail.com",
+    "password":"user"
 }
+
+###
+POST {{api}}/auth/signin
+Content-Type: application/json
+
+{
+    
+    "email":"ermesto@gmail.com",
+    "password":"userd"
+}
+

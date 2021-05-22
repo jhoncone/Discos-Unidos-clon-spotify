@@ -1,41 +1,65 @@
 import { setupMaster } from 'cluster';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState ,useEffect} from 'react';
 import { toast } from 'react-toastify';
 import { User } from '../Users/User';
 import *as userService from '../Users/UserService'
 import  'react-toastify/dist/ReactToastify.css';
-import { useHistory } from 'react-router';
+import { useHistory,useParams } from 'react-router';
 
 type Inputchange=ChangeEvent<HTMLInputElement>;//definiendo un tipo de dato con typescript
 
+
+interface Params{
+  id:string;
+}
+
 function Signup() {
 
-const history=useHistory();
+const initialState={
+  fullname:"",
+  username:"",
+  password:""
+}
 
-    const [user,setUser]=useState<User>({
-      fullname:"",
-      username:"",
-      password:""
-    });
+
+const history=useHistory();
+const params=useParams<Params>();
+//console.log(params)
+
+    const [user,setUser]=useState<User>(initialState);
   
   
   
   const handleInputChange=(e:Inputchange)=>{
-           setUser({...user,[e.target.name]: e.target.value})
-          
-  
+           setUser({...user,[e.target.name]: e.target.value});
   
   }
 
   const handleSubmit=async(e:FormEvent<HTMLFormElement>)=>{
    e.preventDefault();
    //console.log(user);
-   await userService.createUsers(user);
-   toast.success('New user added');
+if(!params.id){
+  await userService.createUsers(user);
+  toast.success('New user added');
+  setUser(initialState);
+}else{
+  await userService.updateUser(params.id,user)
+}
    history.push('/Users')
   // console.log(res);
 
   }
+
+const getUser=async(id:string)=>{
+  const res=await userService.getUser(id);
+  console.log(res);
+}
+
+  useEffect(()=>{
+       if (params.id)getUser(params.id);
+
+  },[])
+
 
   return (
     <div className="row">
@@ -51,6 +75,7 @@ const history=useHistory();
                className="form-control"
                 id="user_email" 
                 onChange={handleInputChange}
+                value={user.fullname}
                 placeholder="Email address" required  />
             </div>
             <div className="form-group">
@@ -60,6 +85,7 @@ const history=useHistory();
               className="form-control" 
               id="user_name" 
               onChange={handleInputChange}
+              value={user.username}
               placeholder="Username" required />
             </div>
           
@@ -70,12 +96,23 @@ const history=useHistory();
           className="form-control" 
           id="user_password" 
           onChange={handleInputChange}
+          value={user.password}
           placeholder="Password" required />
           
         </div>
-        <div className="form-group">
-          <button type="submit" className="btn btn-primary btn-block" id="authButton">Sign up</button>
-        </div>
+            {
+              params.id?
+              
+              <button type="submit" className="btn btn-info btn-block" id="authButton">update user</button>
+          
+            :
+            <button type="submit" className="btn btn-primary btn-block" id="authButton">Sing up</button>
+          
+            
+
+
+            
+            }
         </form>
       </div></div>
 

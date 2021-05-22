@@ -20,6 +20,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 app.use(discoRoutes)
-app.use(userRoutes)
+app.use('/auth',userRoutes)
 
 export default app

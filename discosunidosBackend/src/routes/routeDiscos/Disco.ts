@@ -1,5 +1,9 @@
-import {Schema,model} from 'mongoose'
-
+import {Schema,model,Document} from 'mongoose'
+export interface Idisco extends Document {
+    title: string;
+    artista: string;
+    imagePath: string;
+}
 
 const discoSchema=new Schema({
     title:{
@@ -8,12 +12,12 @@ const discoSchema=new Schema({
         trim:true
 
     },
-    description:{
+    artista:{
         type:String,
         trim:true
 
     },
-    url:{
+    imagePath:{
         type:String,
         required:true,
         trim:true,
@@ -28,4 +32,4 @@ const discoSchema=new Schema({
 })
 
 
-export default model('Disco',discoSchema);
+export default model<Idisco>('Disco',discoSchema);

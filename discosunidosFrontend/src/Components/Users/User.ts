@@ -1,8 +1,8 @@
 export interface User{
-    createAdt?:string;
+    createAdt?:string|Date;
   fullname:string;
   username: string;
-  updatedAt?: string;
+  updatedAt?: string|Date;
   password: string;
   _id?: string;
   }

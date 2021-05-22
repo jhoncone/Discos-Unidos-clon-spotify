@@ -114,6 +114,10 @@ function Navbar() {
         <Route path="/Addisco">
           <Addisc/>
         </Route>
+
+        <Route path="/update/id" component={Signup}/>
+      
+
         </Switch>
         
     

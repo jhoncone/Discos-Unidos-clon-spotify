@@ -16,8 +16,8 @@ export const getDiscos=async()=>{
   
 }
 
-export const createDiscos=async(user:Disco)=>{
-    return await axios.post(`${API}/discos`,user)
+export const createDiscos=async(disco:Disco)=>{
+    return await axios.post(`${API}/discos`,disco)
    // console.log(res)
   
 }

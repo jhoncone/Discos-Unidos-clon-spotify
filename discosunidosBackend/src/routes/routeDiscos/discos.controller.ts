@@ -1,9 +1,11 @@
 import {RequestHandler} from 'express'
 import Disco from './Disco'
+import fs from 'fs-extra'
+import path from 'path'
 
 export const createDiscos:RequestHandler=async(req,res)=>{
 
-   const videoFound= await Disco.findOne({url: req.body.url})
+   const videoFound= await Disco.findOne({title: req.body.title})
    if(videoFound)
    return res.status(301).json({message: 'the URL alredy exist'})
     const disco=new Disco(req.body)
@@ -18,6 +20,7 @@ export const getDiscos:RequestHandler=async(req,res)=>{
         
     } catch (error) {
         res.json(error)
+        console.log('users')
         
     }
 }
